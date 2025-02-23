@@ -14,7 +14,7 @@ bool vedernikova_k_gauss_3x3_horizontal_seq::TestTaskSequential::PreProcessingIm
   }
   kernel_.reserve(9);
   CalculateGaussMatrix();
-  out_matr_ = std::vector<double>(cols_ * rows_, 0.0);
+  out_matr_ = std::vector<double>(cols_ * rows_);
   return true;
 }
 
@@ -61,22 +61,26 @@ void vedernikova_k_gauss_3x3_horizontal_seq::TestTaskSequential::CalculateGaussM
 
 void vedernikova_k_gauss_3x3_horizontal_seq::TestTaskSequential::CalculateNewPixelValue(int x, int y) {
   for (int c = 0; c < 3; c++) {
-    if ((0 <= y - 1) && (y - 1 < cols_) && (0 <= y - 1 + c) && (y - 1 + c <= rows_)) {
+    if ((0 <= y - 1) && (y - 1 < cols_) && (0 <= x - 1 + c) && (x - 1 + c <= rows_)) {
       int index = ((y - 1) * rows_) + x - 1 + c;
       if (index >= 0 && index < rows_ * cols_) {
         out_matr_[(y * rows_) + x] += in_matr_[index] * kernel_[c];
       }
     }
+  }
+  for (int c = 3; c < 6; c++) {
     if ((0 <= y - 1 + c) && (y - 1 + c <= rows_)) {
-      int index = (y * rows_) + x - 1 + c;
+      int index = (y * rows_) + x - 4 + c;
       if (index >= 0 && index < rows_ * cols_) {
-        out_matr_[(y * rows_) + x] += in_matr_[index] * kernel_[c + 3];
+        out_matr_[(y * rows_) + x] += in_matr_[index] * kernel_[c];
       }
     }
-    if ((0 <= y - 1) && (y - 1 < cols_) && (0 <= y - 1 + c) && (y - 1 + c <= rows_)) {
-      int index1 = (y * rows_) + x - 1 + c;
+  }
+  for (int c = 6; c < 9; c++) {
+    if ((0 <= y - 1) && (y - 1 < cols_) && (0 <= x - 1 + c) && (x - 1 + c <= rows_)) {
+      int index1 = (y * rows_) + x - 7 + c;
       if (index1 >= 0 && index1 < rows_ * cols_) {
-        out_matr_[(y * rows_) + x] += in_matr_[index1] * kernel_[c + 6];
+        out_matr_[(y * rows_) + x] += in_matr_[index1] * kernel_[c];
       }
     }
   }

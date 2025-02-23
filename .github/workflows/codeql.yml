@@ -50,7 +50,7 @@ jobs:
           CXX: g++-14
       - name: Build project
         run: |
-          cmake --build build --parallel
+          cmake --build build 
         env:
           CC: gcc-14
           CXX: g++-14

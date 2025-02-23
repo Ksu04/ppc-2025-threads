@@ -68,7 +68,7 @@ jobs:
           path: build/revert-list.txt
       - name: Build project
         run: |
-          cmake --build build --parallel
+          cmake --build build 
         env:
           CC: gcc-14
           CXX: g++-14
@@ -225,7 +225,7 @@ jobs:
           CXX: clang++-19
       - name: Build project
         run: |
-          cmake --build build --parallel
+          cmake --build build 
         env:
           CC: clang-19
           CXX: clang++-19
@@ -387,7 +387,7 @@ jobs:
           CXX: clang++-19
       - name: Build project
         run: |
-          cmake --build build --parallel
+          cmake --build build 
         env:
           CC: clang-19
           CXX: clang++-19
@@ -556,7 +556,7 @@ jobs:
           -DCMAKE_INSTALL_PREFIX=install
       - name: Build project
         run: |
-          cmake --build build --parallel
+          cmake --build build 
       - name: Install project
         run: |
           cmake --build build --target install
@@ -719,7 +719,7 @@ jobs:
       - name: Build project
         shell: bash
         run: |
-          cmake --build build --config Release --parallel
+          cmake --build build --config Release 
       - name: Install project
         run: |
           cmake --build build --target install
@@ -878,7 +878,7 @@ jobs:
           CXX: clang-cl
       - name: Build project
         run: |
-          cmake --build build --config Release --parallel
+          cmake --build build --config Release 
         env:
           CC: clang-cl
           CXX: clang-cl
@@ -1033,7 +1033,7 @@ jobs:
           -D USE_COVERAGE=ON
       - name: Build project
         run: |
-          cmake --build build --parallel
+          cmake --build build 
       - name: Run tests (MPI)
         run: python3 scripts/run_tests.py --running-type="processes"
         env:

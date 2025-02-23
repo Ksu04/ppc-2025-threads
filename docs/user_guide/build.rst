@@ -27,7 +27,7 @@ Navigate to a source code folder.
 
    .. code-block:: bash
 
-      cmake --build . --config Release --parallel
+      cmake --build . --config Release 
 
 3. **Check the task**:
    
